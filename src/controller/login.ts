@@ -4,22 +4,17 @@ import user from "../mockdata/data.js"
 
 const KEY_TOKEN = process.env.SECRET_TOKEN
 
-
-
 class Login {
   login (req:Request, res:Response):any {
-    console.log(KEY_TOKEN)
-    const {email, senha} = req.body
 
+    const {email, senha} = req.body
     const [usuario] = user.filter(user => user.email == email)
-    console.log(usuario)
+
     if(!email || email !== usuario?.email) {
-      console.log(usuario?.email)
       return res.status(401).json({error: "Usuario não encontrado"})
     }
     
     if(!senha || senha !== usuario?.senha) {
-      console.log(usuario?.senha)
       return res.status(401).json({error: "Usuario não encontrado"})
     }
 
@@ -33,8 +28,6 @@ class Login {
       {expiresIn: '1h'}
     )
 
-    console.log("token", token)
-    
     res.json({token}) 
   }
 }
