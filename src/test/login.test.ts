@@ -1,9 +1,12 @@
-import { describe, expect, it, test } from '@jest/globals';
-import request from "supertest"
-import {app} from '../app';
+import { describe, expect, it } from '@jest/globals';
+import request from "supertest";
+import { App } from '../app';
 
 
 describe('verify authentication for login',() => {
+
+  const app = new App().app
+  
   it("Verificar a existencia do usuario", async () => {
 
     const user = {
@@ -14,6 +17,6 @@ describe('verify authentication for login',() => {
     }
     
     const response = await request(app).post('/login').send(user)
-    expect(response.statusCode).toBe(200)
+    expect(response.statusCode).toEqual(200)
   })
 })
